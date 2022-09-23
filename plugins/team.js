@@ -109,7 +109,7 @@ function inject (bot) {
     }
   }
 
-  bot._client.on('teams', teamData => _handlers[teamData.mode](teamData))
+  bot._intermediary.on('teams', teamData => _handlers[teamData.mode](teamData))
 }
 
 module.exports = inject

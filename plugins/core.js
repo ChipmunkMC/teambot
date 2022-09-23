@@ -2,7 +2,7 @@ const nbt = require('prismarine-nbt')
 
 function inject (bot, options) {
   let mcData
-  bot.on('connect', () => (mcData = require('minecraft-data')(bot._client.version)))
+  bot.on('connect', () => (mcData = require('minecraft-data')(bot._intermediary._client.version)))
 
   bot.core = {
     size: {
@@ -22,7 +22,7 @@ function inject (bot, options) {
       const location = { x: Math.floor(bot.position.x), y: Math.floor(bot.position.y) - 1, z: Math.floor(bot.position.z) }
       const commandBlockId = mcData.itemsByName.command_block.id
 
-      bot._client.write('set_creative_slot', {
+      bot._intermediary.write('set_creative_slot', {
         slot: 36,
         item: {
           present: true,
@@ -37,13 +37,13 @@ function inject (bot, options) {
         }
       })
 
-      bot._client.write('block_dig', {
+      bot._intermediary.write('block_dig', {
         status: 0,
         location,
         face: 1
       })
 
-      bot._client.write('block_place', {
+      bot._intermediary.write('block_place', {
         location,
         direction: 1,
         hand: 0,
@@ -59,8 +59,8 @@ function inject (bot, options) {
     run (command) {
       if (!bot.uuid) return
 
-      bot._client.write('update_command_block', { location: this.block, command: '', mode: 0, flags: 0 })
-      bot._client.write('update_command_block', { location: this.block, command: String(command).substring(0, 32767), mode: 2, flags: 0b100 })
+      bot._intermediary.write('update_command_block', { location: this.block, command: '', mode: 0, flags: 0 })
+      bot._intermediary.write('update_command_block', { location: this.block, command: String(command).substring(0, 32767), mode: 2, flags: 0b100 })
 
       this.block.x++
       if (this.block.x > this.to.x) {

@@ -5,8 +5,8 @@ function inject (bot, options) {
     if (!bot.uuid) return
 
     // TODO: Make it m o d u l a r
-    if (bot.permissionLevel < 1) bot._client.write('chat', { message: '/op @s[type=player]' })
-    else if (bot.gamemode !== 'creative') bot._client.write('chat', { message: '/gamemode creative' })
+    if (bot.permissionLevel < 1) bot._intermediary.write('chat', { message: '/op @s[type=player]' })
+    else if (bot.gamemode !== 'creative') bot._intermediary.write('chat', { message: '/gamemode creative' })
   })
 }
 

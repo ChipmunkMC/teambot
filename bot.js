@@ -1,4 +1,5 @@
 const mc = require('minecraft-protocol')
+const Intermediary = require('./intermediary.js')
 const { EventEmitter } = require('node:events')
 const randomUsername = require('./username_generator.js')
 
@@ -23,12 +24,11 @@ function createBot (options = {}) {
   // EventEmitter
   const bot = new EventEmitter()
 
-  // nmp
-  bot._client = options.client ?? mc.createClient(options)
-  bot._client.on('connect', () => bot.emit('connect'))
-  bot._client.on('end', reason => bot.emit('end', reason))
-  bot._client.on('error', error => bot.emit('error', error))
-  bot._client.on('packet', (data, meta) => bot.emit('packet', data, meta))
+  // intermediary
+  bot._intermediary = new Intermediary().setClient(options.client ?? mc.createClient(options))
+  bot._intermediary.on('connect', () => bot.emit('connect'))
+  bot._intermediary.on('end', reason => bot.emit('end', reason))
+  bot._intermediary.on('error', error => bot.emit('error', error))
 
   // Error handling
   bot.on('error', error => { if (!options.hideErrors) console.error(error) })

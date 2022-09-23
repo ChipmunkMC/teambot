@@ -1,12 +1,9 @@
 function inject (bot) {
-  bot.on('packet', (data, meta) => {
-    if (meta.name !== 'login') return
-    bot.emit('login', data)
-  })
+  bot._intermediary.on('login', packet => bot.emit('login', packet))
 
   bot.on('login', data => {
-    bot.username = bot._client.username
-    bot.uuid = bot._client.uuid
+    bot.username = bot._intermediary._client.username
+    bot.uuid = bot._intermediary._client.uuid
     bot.entityId = data.entityId
   })
 

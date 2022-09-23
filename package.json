@@ -1,7 +1,7 @@
 {
   "name": "teambot",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A node-minecraft-protocol bot which creates two teams, and makes one a default team",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +10,21 @@
   "license": "Unlicense",
   "dependencies": {
     "minecraft-protocol": "^1.36.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChipmunkMC/teambot.git"
+  },
+  "keywords": [
+    "teambot",
+    "team",
+    "bot",
+    "minecraft",
+    "minecraft-protocol"
+  ],
+  "bugs": {
+    "url": "https://github.com/ChipmunkMC/teambot/issues"
+  },
+  "homepage": "https://github.com/ChipmunkMC/teambot#readme"
 }
