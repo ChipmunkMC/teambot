@@ -11,6 +11,7 @@ module.exports = [
     exclusiveTeam: '0000',
     exclusivePrefixColor: `gold`,
     exclusiveTeamColor: `red`,
+    exclusiveTeamPrefix: `luftwaffe`,
 
     // Reconnect
     reconnect: true,
