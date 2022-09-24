@@ -7,7 +7,10 @@ module.exports = [
 
     // Default Team Handler
     inclusiveTeam: '000a',
+    inclusiveTeamColor: `gray`,
     exclusiveTeam: '0000',
+    exclusivePrefixColor: `gold`,
+    exclusiveTeamColor: `red`,
 
     // Reconnect
     reconnect: true,

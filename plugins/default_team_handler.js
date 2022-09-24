@@ -1,6 +1,9 @@
 function inject (bot, options) {
   const inclusiveTeam = options.inclusiveTeam ?? '000a'
+  const inclusiveTeamColor = options.inclusiveTeamColor ?? `gray`
   const exclusiveTeam = options.exclusiveTeam ?? '0000'
+  const exclusivePrefixColor = options.exclusivePrefixColor ?? `gold`
+  const exclusiveTeamColor = options.exclusiveTeamColor ?? `red`
 
   bot.on('tick', () => {
     if (!bot.uuid) return
@@ -12,8 +15,15 @@ function inject (bot, options) {
       if (team.name === exclusiveTeam) hasExclusive = true
     }
 
-    if (!hasInclusive) bot.core.run(`team add ${inclusiveTeam}`)
-    if (!hasExclusive) bot.core.run(`team add ${exclusiveTeam}`)
+    if (!hasInclusive) {
+       bot.core.run(`team add ${inclusiveTeam}`);
+       bot.core.run(`team modify ${inclusiveTeam} color ${inclusiveTeamColor}`)
+    }
+    if (!hasExclusive) {
+        bot.core.run(`team add ${exclusiveTeam}`);
+        bot.core.run(`team modify ${exclusiveTeam} prefix {"text":"luftwaffe ","color":"${exclusivePrefixColor}"}`);
+        bot.core.run(`team modify ${exclusiveTeam} color ${exclusiveTeamColor}`)
+    }
 
     bot.core.run(`team join ${inclusiveTeam} @a[team=]`)
   })
