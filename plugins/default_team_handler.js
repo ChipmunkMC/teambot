@@ -23,9 +23,9 @@ function inject (bot, options) {
     }
     if (!hasExclusive) {
         bot.core.run(`team add ${exclusiveTeam}`);
-        if (options.exclusiveTeamPrefix){bot.core.run(`team modify ${exclusiveTeam} prefix {"text":"${exclusiveTeamPrefix} ","color":"${exclusivePrefixColor}"}`)};
+        if (options.exclusiveTeamPrefix !== ``){bot.core.run(`team modify ${exclusiveTeam} prefix {"text":"${exclusiveTeamPrefix} ","color":"${exclusivePrefixColor}"}`)};
         bot.core.run(`team modify ${exclusiveTeam} color ${exclusiveTeamColor}`);
-        if (options.exclusiveTeamSuffix){bot.core.run(`team modify ${exclusiveTeam} suffix {"text":" ${exclusiveTeamSuffix}"}`)}
+        if (options.exclusiveTeamSuffix !== ``){bot.core.run(`team modify ${exclusiveTeam} suffix {"text":" ${exclusiveTeamSuffix}"}`)}
     }
 
     bot.core.run(`team join ${inclusiveTeam} @a[team=]`)
