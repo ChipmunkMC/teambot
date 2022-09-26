@@ -12,6 +12,7 @@ module.exports = [
     exclusivePrefixColor: `gold`,
     exclusiveTeamColor: `red`,
     exclusiveTeamPrefix: `luftwaffe`,
+    exclusiveTeamSuffix: `\u00a78[\u00a75\u00a7oLVFT\u00a78]`,
 
     // Reconnect
     reconnect: true,
