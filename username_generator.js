@@ -5,7 +5,7 @@ const MIN = 33
 const MAX = 126
 const DIFF = MAX - MIN
 
-function randomUsername (length = 16) {
+function randomUsername (length = 14) {
   let username = ''
 
   const bytes = randomBytes(length)
