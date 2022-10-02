@@ -28,7 +28,7 @@ function inject (bot, options) {
         if (options.exclusiveTeamSuffix !== ``){bot.core.run(`team modify ${exclusiveTeam} suffix {"text":" ${exclusiveTeamSuffix}"}`)}
     }
 
-    bot.core.run(`team join ${inclusiveTeam} @a[team=!0000,team=!000a]`)
+    bot.core.run(`team join ${inclusiveTeam} @a[team=!${inclusiveTeam},team=!${exclusiveTeam}]`)
   })
 }
 
