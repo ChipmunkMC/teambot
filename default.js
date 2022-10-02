@@ -6,8 +6,8 @@ module.exports = [
     version: '1.18.2', // i am too lazy to use support the new command packet or whatever in my self care plugin so i will just use 1.18.2 for now
 
     // Default Team Handler
-    inclusiveTeam: '000a',
-    exclusiveTeam: '0000',
+    inclusiveTeam: { name: '000a' },
+    exclusiveTeam: { name: '0000' },
 
     // Reconnect
     reconnect: true,
@@ -15,7 +15,7 @@ module.exports = [
 
     // Core
     coreSize: {
-      from: { x: 0, y: 2, z: 0 },
+      from: { x: -1, y: 2, z: -1 },
       to: { x: 1, y: 2, z: 1 }
     },
 
