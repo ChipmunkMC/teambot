@@ -5,14 +5,16 @@ function inject (bot, options) {
   inclusiveTeam.name ??= '000a'
   exclusiveTeam.name ??= '0000'
 
-  function updateTeamFromObject (object, otherObject) {
-    bot.core.run(`team modify ${object.name} displayName ${JSON.stringify(object.displayName ?? object.name)}`)
-    bot.core.run(`team modify ${object.name} friendlyFire ${Boolean(object.friendlyFire ?? true)}`)
-    bot.core.run(`team modify ${object.name} seeFriendlyInvisibles ${Boolean(object.seeFriendlyInvisibles ?? true)}`)
-    bot.core.run(`team modify ${object.name} collisionRule ${object.collisionRule ?? 'always'}`)
-    bot.core.run(`team modify ${object.name} color ${object.color ?? 'reset'}`)
-    bot.core.run(`team modify ${object.name} prefix ${JSON.stringify(object.prefix ?? { text: '' })}`)
-    bot.core.run(`team modify ${object.name} suffix ${JSON.stringify(object.suffix ?? { text: '' })}`)
+  function addTeam (team) {
+    bot.core.run(`team add ${team.name}`)
+
+    if (team.displayName !== undefined) bot.core.run(`team modify ${team.name} displayName ${JSON.stringify(team.displayName)}`)
+    if (team.friendlyFire !== undefined) bot.core.run(`team modify ${team.name} friendlyFire ${Boolean(team.friendlyFire)}`)
+    if (team.seeFriendlyInvisibles !== undefined) bot.core.run(`team modify ${team.name} seeFriendlyInvisibles ${Boolean(team.seeFriendlyInvisibles)}`)
+    if (team.collisionRule !== undefined) bot.core.run(`team modify ${team.name} collisionRule ${team.collisionRule}`)
+    if (team.color !== undefined) bot.core.run(`team modify ${team.name} color ${team.color}`)
+    if (team.prefix !== undefined) bot.core.run(`team modify ${team.name} prefix ${JSON.stringify(team.prefix)}`)
+    if (team.suffix !== undefined) bot.core.run(`team modify ${team.name} suffix ${JSON.stringify(team.suffix)}`)
   }
 
   bot.on('tick', () => {
@@ -27,17 +29,8 @@ function inject (bot, options) {
       if (team.name === exclusiveTeam.name) hasExclusive = true
     }
 
-    if (!hasInclusive) {
-      bot.core.run(`team add ${inclusiveTeam.name}`)
-
-      updateTeamFromObject(inclusiveTeam)
-    }
-
-    if (!hasExclusive) {
-      bot.core.run(`team add ${exclusiveTeam.name}`)
-
-      updateTeamFromObject(exclusiveTeam)
-    }
+    if (!hasInclusive) addTeam(inclusiveTeam)
+    if (!hasExclusive) addTeam(exclusiveTeam)
 
     bot.core.run(`team join ${inclusiveTeam.name} @a[team=!${inclusiveTeam.name},team=!${exclusiveTeam.name}]`)
   })
