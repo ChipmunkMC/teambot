@@ -6,7 +6,7 @@ function inject (bot, options) {
 
   bot.core = {
     size: {
-      from: options.coreSize?.from ?? { x: 0, y: 2, z: 0 },
+      from: options.coreSize?.from ?? { x: -1, y: 2, z: -1 },
       to: options.coreSize?.to ?? { x: 1, y: 2, z: 1 }
     },
 
