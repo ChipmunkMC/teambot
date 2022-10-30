@@ -18,6 +18,8 @@ class Intermediary extends EventEmitter {
       this.emit('raw', buffer, metadata)
     })
 
+    client.on('state', (newState, oldState) => this.emit('state', newState, oldState))
+
     return this
   }
 
