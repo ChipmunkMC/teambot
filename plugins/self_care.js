@@ -8,6 +8,11 @@ function inject (bot, options) {
     if (bot.permissionLevel < 1) bot._intermediary.write('chat', { message: '/op @s[type=player]' })
     else if (bot.gamemode !== 'creative') bot._intermediary.write('chat', { message: '/gamemode creative' })
   })
+
+  // Patch the end credits exploit
+  bot._intermediary.on('game_state_change', packet => {
+    if (packet.reason === 4) bot._intermediary.write('client_command', { payload: 0 })
+  })
 }
 
 module.exports = inject
